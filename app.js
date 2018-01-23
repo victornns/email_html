@@ -2,12 +2,22 @@ const inlineCss = require('inline-css')
 const fs = require('fs')
 
 
-let html = fs.readFileSync('./teste/index.html', 'utf8', (err, data) => {
-    if (err) throw err
-    return data
-})
+one_at_a_time('users_new_access.html')
 
-inlineCss(html, {url: 'file://' + __dirname + '/teste/style.css'})
-    .then(function(html) {
-        console.log(html)
+
+
+function one_at_a_time(file){
+    let data = fs.readFileSync('./template/' + file, 'utf8', (err, data) => {
+        if (err) throw err
     })
+
+    inlineCss(data, {url: 'file://' + __dirname + '/template/css/style.css'})
+        .then(function(data) {
+            console.log(data)
+        })
+}
+
+
+// function all_at_once(file){
+//
+// }
