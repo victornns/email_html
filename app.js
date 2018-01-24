@@ -5,7 +5,7 @@ const concat    = require('concat')
 
 // compile single file or undefined will compile all files
 // let single_file = 'example_file.html'   /   undefined
-let single_file = 'users_new_access.html'
+let single_file = undefined
 
 
 if(single_file)
@@ -39,5 +39,27 @@ function one_at_a_time(file){
 
 
 function all_at_once(){
-    console.log('all');
+
+    fs.readdir('./template', function(err, files) {
+        let files_html = files.filter(function(file) {
+            return file.substr(-5) === '.html'
+        })
+
+        files_html.forEach((item) => {
+            one_at_a_time(item)
+        })
+    })
+
 }
+
+
+
+
+
+
+
+
+
+
+
+//
